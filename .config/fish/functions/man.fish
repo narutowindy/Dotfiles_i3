@@ -8,8 +8,8 @@ function man --description 'Format and display manual pages'
 
     set -l end (printf "\e[0m")
 
-set -x LESS_TERMCAP_mb (printf "\e[01;31m")
-set -x LESS_TERMCAP_md (printf "\e[01;31m")
+set -x LESS_TERMCAP_mb (printf "\e[01;32m")
+set -x LESS_TERMCAP_md (printf "\e[01;32m")
 set -x LESS_TERMCAP_me (printf "\e[0m")
 set -x LESS_TERMCAP_se (printf "\e[0m")
 set -x LESS_TERMCAP_so (printf "\e[01;44;33m")
@@ -17,14 +17,6 @@ set -x LESS_TERMCAP_ue (printf "\e[0m")
 set -x LESS_TERMCAP_us (printf "\e[01;32m")
 
 
-    #set -lx LESS_TERMCAP_mb $blink
-   # set -lx LESS_TERMCAP_md $bold
-  #  set -lx LESS_TERMCAP_me $end
-  #  set -lx LESS_TERMCAP_so $standout
-  #  set -lx LESS_TERMCAP_se $end
-  #  set -lx LESS_TERMCAP_us $underline
-  #  set -lx LESS_TERMCAP_ue $end
-  #  set -lx LESS '-R -s'
 
     set -lx GROFF_NO_SGR yes # fedora
 

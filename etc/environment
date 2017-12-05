@@ -6,4 +6,4 @@
 _JAVA_OPTIONS='-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel' 
 _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'
 JAVA_FONTS=/usr/share/fonts/TTF
-
+NO_AT_BRIDGE=1

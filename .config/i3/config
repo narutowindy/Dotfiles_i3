@@ -18,10 +18,10 @@ bindsym $mod+q kill
 #::: start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run -i -fn 'monaco-9:bold:pixelsize=12' -nb '#3F3F3F' -nf '#15B3E8' -sf '#000000' -sb '#F2FA00'
 #:::: change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+#bindsym $mod+j focus left
+#bindsym $mod+k focus down
+#bindsym $mod+l focus up
+#bindsym $mod+semicolon focus right
 # :::alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
@@ -64,6 +64,7 @@ for_window [class="(?i)urxvt"] floating enable
 for_window [class="(?i)mpv"] floating enable
 for_window [class="(?i)xterm"] floating enable
 for_window [class="(?i)feh"] floating enable
+for_window [class="(?i)leafpad"] floating enable
 
 
 # change focus between tiling / floating windows
@@ -87,25 +88,27 @@ bindsym $mod+a focus parent
 
 ######grouping workspaces+name####
 
-set $ws1 "1:"
-set $ws2 "2:"
-set $ws3 "3:"    
-set $ws4  "4:"
-set $ws5  "5:"
-set $ws6  "6:"
-set $ws7  "7:"
-set $ws8  "8:"
-set $ws9   "9:"
-set $ws10  "10:"
+set $ws1 "<span color='#ffffff'>1: </span>"
+set $ws2 "<span color='#ffff33'>2:</span>"
+set $ws3 "<span color='#cc00ff'>3:</span>"    
+set $ws4  "<span color='#00A1F1'>4:</span>"
+set $ws5  "<span color='#F65314'>5:</span>"
+set $ws6  "<span color='#f7786b'>6:</span>"
+set $ws7  "<span color='#FBBC05'>7:</span>"
+set $ws8  "<span color='#00ffff'>8:</span>"
+set $ws9   "<span color='#33bdf5'>9:</span>"
+set $ws10  "<span color='#ff66ff'>10:</span>"
 
 
 #assign [class="(?i)urxvt"] → $ws1
 assign [class="(?i)chromium"] → $ws2
 assign [class="(?i)mpv"] → $ws3
 assign [class="(?i)mupdf"] → $ws4
+assign [class="(?i)leafpad"] → $ws4
 assign [class="(?i)wireshark-gtk"] → $ws8
-assign [class="^Firefox$" instance="^Navigator$"] → $ws9
+assign [class="Nightly" instance="^Navigator$"] → $ws9
 assign [class="^Tor Browser$" instance="^Navigator$"] → $ws9
+assign [class="burp-StartBurp" instance="^sun-awt-X11-XFramePeer$"] → $ws8
 
 # switch to workspace
 bindsym $mod+1 workspace  $ws1
@@ -140,19 +143,22 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 #bindsym $mod+Shift+e exec "i3-nagbar -f 'pango:monaco 8' -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 bindsym $mod+Shift+e exec "i3 exit"
+#bindsym $mod+l exec "i3lock  -efc 202020 "
+bindsym $mod+l exec "i3lock -ef -c 000000 "
 
+#exec_always --no-startup-id "killall -q dunst; dunst -config ~/.config/i3/dunstrc"
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        bindsym j resize shrink width 100 px or 10 ppt
-        bindsym k resize grow height 100 px or 10 ppt
-        bindsym l resize shrink height 100 px or 10 ppt
-        bindsym semicolon resize grow width 100 px or 10 ppt
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 100 px or 10 ppt
-        bindsym Down resize grow height 100 px or 10 ppt
-        bindsym Up resize shrink height 100 px or 10 ppt
-        bindsym Right resize grow width 100 px or 10 ppt
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -165,16 +171,16 @@ bindsym $mod+r mode "resize"
 
 mode "moveit" {
 #using h,j,k,l=====
-    bindsym k move up 100px
-    bindsym h move left 100px
-    bindsym j move down 100px
-    bindsym l move right 100px
+    bindsym k move up 10px
+    bindsym h move left 10px
+    bindsym j move down 10px
+    bindsym l move right 10px
 
 #using arrow keys====
-    bindsym Up move up 100px
-    bindsym Left move left 100px
-    bindsym Down move down 100px
-    bindsym Right move right 100px
+    bindsym Up move up 10px
+    bindsym Left move left 10px
+    bindsym Down move down 10px
+    bindsym Right move right 10px
     
     bindsym Mod4+c mode "default"
     bindsym Escape mode "default"
@@ -192,8 +198,8 @@ hide_edge_borders vertical
 
 
 #:::::i3_ gaps::::::::::::::
-set $default_gaps_inner 10
-set $default_gaps_outer 10
+set $default_gaps_inner 5
+set $default_gaps_outer 5
 gaps inner $default_gaps_inner
 gaps outer $default_gaps_outer
 smart_gaps on
@@ -201,13 +207,13 @@ smart_borders on
 
 
 #:::::::::control de volume:::::::::::::
-#bindsym XF86AudioRaiseVolume exec "amixer -q sset Master,0 2+ unmute"
-#bindsym XF86AudioLowerVolume exec "amixer -q sset Master,0 2- unmute"
-#bindsym XF86AudioMute exec "amixer -q sset Master,0 toggle"
+bindsym XF86AudioRaiseVolume exec "amixer -q sset Master,0 2+ unmute"
+bindsym XF86AudioLowerVolume exec "amixer -q sset Master,0 2- unmute"
+bindsym XF86AudioMute exec "amixer -q sset Master,0 toggle"
 
-bindsym XF86AudioRaiseVolume exec "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 +5%"
-bindsym XF86AudioLowerVolume exec "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 -5%"
-bindsym XF86AudioMute exec "pactl set-sink-mute 0 toggle"
+#bindsym XF86AudioRaiseVolume exec "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 +5%"
+#bindsym XF86AudioLowerVolume exec "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 -5%"
+#bindsym XF86AudioMute exec "pactl set-sink-mute 0 toggle"
 
 #exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
@@ -221,12 +227,12 @@ bar {
   
     colors {
         statusline   #f9f9f9
-        background   #585858
+        background   #232629
 		separator    #deea1f
 				     	#border 	#bg		#txt
 						
-       focused_workspace	#585858	#585858	 #2fff00
-        inactive_workspace	#585858	#585858	 #808080
+       focused_workspace	#232629	#232629	 #2fff00
+        inactive_workspace	#232629	#232629	 #808080
 		active_workspace	#777F8B	#777F8B	 #ecedee
  	    urgent_workspace	#DEDFE3	#DEDFE3	 #767E8A
 	}
